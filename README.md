@@ -18,6 +18,12 @@ A project to manage IT Projects.
   - Import/Export (not implemented)
   - Internationalization (not implemented)
   
+# Workspace initialization
+You can change any of the following settings in database.properties
+  - Create a database "pimpdb" with a user "pimp" as owner with the password "pimp-d.?F" 
+You can change any of the following settings in application.properties
+  - The default port is 9296
+  
  # Framework
   - Spring Boot
   - Spring MVC
