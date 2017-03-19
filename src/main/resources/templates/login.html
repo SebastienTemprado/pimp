@@ -3,6 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
     <head>
         <title th:text="#{login.page-title}">Pimp - Login</title>
+        <link th:href="@{/css/stylesheet.css}" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <div th:if="${param.error}" th:text="#{login.error.invalid-login}">
