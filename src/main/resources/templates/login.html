@@ -4,24 +4,31 @@
     <head>
         <title th:text="#{login.page-title}">Pimp - Login</title>
         <link th:href="@{/css/stylesheet.css}" rel="stylesheet" type="text/css"/>
+        <script type="text/javascript" th:src="@{/js/login.js}"></script>
     </head>
     <body>
-        <div th:if="${param.error}" th:text="#{login.error.invalid-login}">
-            Invalid username and password.
-        </div>
-        <div th:if="${param.logout}" th:text="#{login.logout-success}">
-            You have been logged out.
-        </div>
-        <form th:action="@{/login}" method="post">
-            <div>
-            	<label th:text="#{login.username-label}">User Name : </label><input type="text" name="username"/>
-            </div>
-            <div>
-            	<label th:text="#{login.password-label}">Password: </label><input type="password" name="password"/>
-            </div>
-            <div>
-            	<input type="submit" th:value="#{login.signin-submit-label}" value="Sign In"/>
-            </div>
-        </form>
+    	<div th:replace="fragments/header :: header"/> 
+        
+        <div id="loginForm">
+        	<form th:action="@{/login}" method="post">
+        	
+	        	<div th:if="${param.error}" th:text="#{login.error.invalid-login}">
+		            Invalid username and password.
+		        </div>
+		        <div th:if="${param.logout}" th:text="#{login.logout-success}">
+		            You have been logged out.
+		        </div>
+        	
+	            <div>
+	            	<label class="col-label-1-2" th:text="#{login.username-label}">User Name : </label><input class="col-value-2-2" type="text" name="username"/>
+	            </div>
+	            <div>
+	            	<label class="col-label-1-2" th:text="#{login.password-label}">Password: </label><input class="col-value-2-2" type="password" name="password"/>
+	            </div>
+	            <div>
+	            	<input type="submit" th:value="#{login.signin-submit-label}" value="Sign In"/>
+	            </div>
+	        </form>
+    	</div>
     </body>
 </html>
