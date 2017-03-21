@@ -29,14 +29,25 @@ body {
 #loginForm {
 	text-align: center;
 	height:100%;
+	margin-top: 30px;
+}
+
+.rowForm {
+	margin-top: 10px;
 }
 
 .col-label-1-2 {
 	width: 50%;
 	text-align: right;
+	display: inline-block;
+}
+
+.col-label-1-2 label {
+	margin-right: 5px;	
 }
 
 .col-value-2-2 {
 	width: 50%;
 	text-align: left;
+	display: inline-block;
 }
