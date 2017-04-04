@@ -30,24 +30,22 @@ import org.springframework.test.context.junit4.SpringRunner;
 public abstract class AbstractE2ETest {
 	
 	/**
-	 * DNS or IP of the running application
+	 * DNS or IP + port of the runnin application 
+	 * example : http://localhost:9296/
 	 */
-	protected static String host;
-	/**
-	 * port of the running application
-	 */
-	protected static String port;
-
+	protected static String baseUrl;
+	
 	protected static WebDriver driver;
 	
 	@BeforeClass
 	public static void initWebDriver() throws E2EConfigurationException {
-		host = System.getProperty("host");
-		port = System.getProperty("port");
+		final String host = System.getProperty("host");
+		final String port = System.getProperty("port");
 		final String e2eBrowser = System.getProperty("e2eBrowser");
 		final String webdriverPath = System.getProperty("webdriverPath");
 
 		if (e2eBrowser != null && webdriverPath != null && host != null && port != null) {
+			baseUrl = "http://" + host + ":" + port + "/";
 			switch (e2eBrowser) {
 			case "Chrome":
 				System.setProperty("webdriver.chrome.driver", webdriverPath);
