@@ -12,10 +12,10 @@
         <div id="loginForm">
         	<form th:action="@{/login}" method="post">
         	
-	        	<div th:if="${param.error}" th:text="#{login.error.invalid-login}">
+	        	<div th:class="error-message" th:if="${param.error}" th:text="#{login.error.invalid-login}">
 		            Invalid username and password.
 		        </div>
-		        <div th:if="${param.logout}" th:text="#{login.logout-success}">
+		        <div th:class="error-message" th:if="${param.logout}" th:text="#{login.logout-success}">
 		            You have been logged out.
 		        </div>
         	
