@@ -2,21 +2,21 @@
 A project to manage IT Projects.
 
 # Features 
-  - Scrum (not implemented)
-  - Ticketing system (not implemented)
-  - LDAP Authentification (not implemented)
-  - Users management (not implemented)
-  - Tests management (not implemented)
-  - Linked with the code (not implemented)
-  - Reportings (not implemented)
-  - Calendar Management (not implemented)
-  - Notifications (not implemented)
-  - Polling (not implemented)
-  - Chat (not implemented)
-  - Audio meetings (not implemented)
-  - Backup (not implemented)
-  - Import/Export (not implemented)
-  - Internationalization (not implemented)
+  - F001 : Scrum (not implemented)
+  - F002 : Ticketing system (not implemented)
+  - F003 : LDAP Authentification (not implemented)
+  - F004 : Users management (not implemented)
+  - F005 : Tests management (not implemented)
+  - F006 : Linked with the code (not implemented)
+  - F007 : Reportings (not implemented)
+  - F008 : Calendar Management (not implemented)
+  - F009 : Notifications (not implemented)
+  - F010 : Polling (not implemented)
+  - F011 : Chat (not implemented)
+  - F012 : Audio meetings (not implemented)
+  - F013 : Backup (not implemented)
+  - F014 : Import/Export (not implemented)
+  - F015 : Internationalization (not implemented)
   
 # Workspace initialization
 You can change any of the following settings in database.properties
@@ -27,9 +27,12 @@ You can change any of the following settings in application.properties
  # Framework
   - Spring Boot
   - Spring MVC
+  - Spring Security
   - Java8
   - REST
+  - Hibernate
   - Postgresql
+  - Selenium (Firefox & Chrome)
   
  # Other information
   - Language : English
