@@ -20,4 +20,17 @@ public class HomeController {
 	public String login() {
 		return "login";
 	}
+	
+	@RequestMapping("/loggedIn")
+	public String signin() {
+		System.out.println("logged In");
+		return "pimp";
+	}
+	
+	@RequestMapping("/signupForm")
+	public String signup() {
+		System.out.println("signup");
+		return "signupForm";
+	}
+	
 }
