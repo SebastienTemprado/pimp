@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
     <head>
-        <title th:text="#{login.page-title}">Pimp - Signup</title>
+        <title th:text="#{signupForm.page-title}">Pimp - Sign up</title>
         <div th:remove="tag" th:replace="fragments/header :: common-static-resources"></div>
     </head>
     <body>
@@ -12,15 +12,31 @@
         	<form th:action="@{/signup}" th:method="post">
 	
 	            <div class="rowForm">
-	            	<div class="col-label-1-2"><label th:text="#{login.username-label}">User Name : </label></div>
+	            	<div class="col-label-1-2"><label th:text="#{signupForm.username-label}">User Name : </label></div>
 	            	<div class="col-value-2-2"><input th:id="username" type="text" name="username"/></div>
 	            </div>
 	            <div class="rowForm">
-	            	<div class="col-label-1-2"><label th:text="#{login.password-label}">Password: </label></div>
+	            	<div class="col-label-1-2"><label th:text="#{signupForm.password-label}">Password: </label></div>
 	            	<div class="col-value-2-2"><input th:id="password" type="password" name="password"/></div>
 	            </div>
+	            <div class="rowForm">
+	            	<div class="col-label-1-2"><label th:text="#{signupForm.password-confirmation-label}">Password confirmation: </label></div>
+	            	<div class="col-value-2-2"><input th:id="password-confirmation" type="password" name="password-confirmation"/></div>
+	            </div>
+	            <div class="rowForm">
+	            	<div class="col-label-1-2"><label th:text="#{signupForm.lastname-label}">Last name: </label></div>
+	            	<div class="col-value-2-2"><input th:id="lastname" type="text" name="lastname"/></div>
+	            </div>
+	            <div class="rowForm">
+	            	<div class="col-label-1-2"><label th:text="#{signupForm.firstname-label}">First name: </label></div>
+	            	<div class="col-value-2-2"><input th:id="firstname" type="text" name="firstname"/></div>
+	            </div>
+	            <div class="rowForm">
+	            	<div class="col-label-1-2"><label th:text="#{signupForm.email-label}">Email: </label></div>
+	            	<div class="col-value-2-2"><input th:id="email" type="text" name="email"/></div>
+	            </div>
 	            <div class="rowForm actions">
-	            	<button th:id="signUp" type="submit" th:value="signup">Sign up</button>
+	            	<button th:id="signUp" type="submit" th:value="signup" th:text="#{signupForm.signup-submit-label}">Sign up</button>
 	            </div>
 	        </form>
     	</div>
