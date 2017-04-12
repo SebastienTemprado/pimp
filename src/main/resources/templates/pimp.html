@@ -3,7 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
     <head>
         <title>Pimp</title>
-        <link th:href="@{/css/stylesheet.css}" rel="stylesheet" type="text/css"/>
+        <div th:remove="tag" th:replace="fragments/header :: common-static-resources"></div>
     </head>
     <body>
     	
