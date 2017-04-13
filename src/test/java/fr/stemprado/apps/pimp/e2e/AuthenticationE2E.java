@@ -6,7 +6,6 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class AuthenticationE2E extends AbstractE2ETest {
 	
@@ -16,8 +15,8 @@ public class AuthenticationE2E extends AbstractE2ETest {
 		driver.get(baseUrl + "/pimp");
 		// forward to Login page
 	    assertThat(driver.getTitle()).isEqualTo("Pimp - Login");
-	    WebElement username = (new WebDriverWait(driver, 10))
-	    		  .until(ExpectedConditions.presenceOfElementLocated(By.id("username")));
+	    
+	    WebElement username = driverWaiting().until(ExpectedConditions.presenceOfElementLocated(By.id("username")));
 	    username.sendKeys("user");
 	    WebElement password = driver.findElement(By.id("password"));
 	    // wrong password 
@@ -26,14 +25,14 @@ public class AuthenticationE2E extends AbstractE2ETest {
 	    submit.click();
 	    // wrong password : stay on the login page
 	    assertThat(driver.getTitle()).isEqualTo("Pimp - Login");
-	    username = (new WebDriverWait(driver, 10))
-	    		  .until(ExpectedConditions.presenceOfElementLocated(By.id("username")));
+	    
+	    username = driverWaiting().until(ExpectedConditions.presenceOfElementLocated(By.id("username")));
 	    username.sendKeys("user");
 	    password = driver.findElement(By.id("password"));
 	    password.sendKeys("password");
 	    submit = driver.findElement(By.id("signIn"));
 	    submit.click();
-	    new WebDriverWait(driver, 10).until(ExpectedConditions.titleIs("Pimp"));
+	    driverWaiting().until(ExpectedConditions.titleIs("Pimp"));
 	    // access granted
 	    assertThat(driver.getTitle()).isEqualTo("Pimp");
 	}

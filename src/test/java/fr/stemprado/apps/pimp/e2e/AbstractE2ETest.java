@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
@@ -29,8 +30,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 public abstract class AbstractE2ETest {
 	
+	private final static int WAITING_DELAY = 20;
+	
 	/**
-	 * DNS or IP + port of the runnin application 
+	 * DNS or IP + port of the running application 
 	 * example : http://localhost:9296/
 	 */
 	protected static String baseUrl;
@@ -67,6 +70,10 @@ public abstract class AbstractE2ETest {
 		if (driver != null) {
 			driver.quit();
 		}
+	}
+	
+	protected WebDriverWait driverWaiting() {
+		return new WebDriverWait(driver, WAITING_DELAY);
 	}
 
 }
