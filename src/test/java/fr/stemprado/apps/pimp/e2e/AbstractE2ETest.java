@@ -72,6 +72,16 @@ public abstract class AbstractE2ETest {
 		}
 	}
 	
+	/**
+	 * Close the browser and open it again
+	 * @throws E2EConfigurationException 
+	 */
+	protected void restartDriver() throws E2EConfigurationException {
+		after();
+		initWebDriver();
+		
+	}
+	
 	protected WebDriverWait driverWaiting() {
 		return new WebDriverWait(driver, WAITING_DELAY);
 	}

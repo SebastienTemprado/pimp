@@ -16,6 +16,7 @@ public class AuthenticationE2E extends AbstractE2ETest {
 		// forward to Login page
 	    assertThat(driver.getTitle()).isEqualTo("Pimp - Login");
 	    
+	    // try to login with a wrong password
 	    WebElement username = driverWaiting().until(ExpectedConditions.presenceOfElementLocated(By.id("username")));
 	    username.sendKeys("user");
 	    WebElement password = driver.findElement(By.id("password"));
@@ -26,6 +27,7 @@ public class AuthenticationE2E extends AbstractE2ETest {
 	    // wrong password : stay on the login page
 	    assertThat(driver.getTitle()).isEqualTo("Pimp - Login");
 	    
+	    // try to login = OK
 	    username = driverWaiting().until(ExpectedConditions.presenceOfElementLocated(By.id("username")));
 	    username.sendKeys("user");
 	    password = driver.findElement(By.id("password"));
@@ -35,6 +37,17 @@ public class AuthenticationE2E extends AbstractE2ETest {
 	    driverWaiting().until(ExpectedConditions.titleIs("Pimp"));
 	    // access granted
 	    assertThat(driver.getTitle()).isEqualTo("Pimp");
+	}
+	
+	@Test
+	public void signup() throws E2EConfigurationException {
+		// restart the driver to logout
+		restartDriver();
+		driver.get(baseUrl + "/login");
+		// Sign up
+	    WebElement signupButton = driverWaiting().until(ExpectedConditions.presenceOfElementLocated(By.id("signup")));
+	    signupButton.click();
+	    assertThat(driver.getTitle()).isEqualTo("Pimp - Sign up");
 	}
 
 }
