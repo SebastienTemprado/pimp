@@ -28,9 +28,15 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/signupForm")
+	public String signupForm() {
+		System.out.println("signupForm");
+		return "signupForm";
+	}
+	
+	@RequestMapping("/signup")
 	public String signup() {
 		System.out.println("signup");
-		return "signupForm";
+		return "login";
 	}
 	
 }
