@@ -9,31 +9,31 @@
     	<div th:replace="fragments/header :: header"></div> 
         
         <div id="signupForm">
-        	<form th:action="@{/signup}" th:method="post">
+        	<form th:action="@{/signup}" th:object="${userDTO}" th:method="post">
 	
 	            <div class="rowForm">
 	            	<div class="col-label-1-2"><label th:text="#{signupForm.username-label}">User Name : </label></div>
-	            	<div class="col-value-2-2"><input th:id="username" type="text" name="username"/></div>
+	            	<div class="col-value-2-2"><input th:id="username" th:field="*{username}" type="text" name="username"/></div>
 	            </div>
 	            <div class="rowForm">
 	            	<div class="col-label-1-2"><label th:text="#{signupForm.password-label}">Password: </label></div>
-	            	<div class="col-value-2-2"><input th:id="password" type="password" name="password"/></div>
+	            	<div class="col-value-2-2"><input th:id="password" th:field="*{password}" type="password" name="password"/></div>
 	            </div>
 	            <div class="rowForm">
 	            	<div class="col-label-1-2"><label th:text="#{signupForm.password-confirmation-label}">Password confirmation: </label></div>
-	            	<div class="col-value-2-2"><input th:id="password-confirmation" type="password" name="password-confirmation"/></div>
+	            	<div class="col-value-2-2"><input th:id="password-confirmation" th:field="*{passwordConfirmation}" type="password" name="password-confirmation"/></div>
 	            </div>
 	            <div class="rowForm">
 	            	<div class="col-label-1-2"><label th:text="#{signupForm.lastname-label}">Last name: </label></div>
-	            	<div class="col-value-2-2"><input th:id="lastname" type="text" name="lastname"/></div>
+	            	<div class="col-value-2-2"><input th:id="lastname" th:field="*{lastname}" type="text" name="lastname"/></div>
 	            </div>
 	            <div class="rowForm">
 	            	<div class="col-label-1-2"><label th:text="#{signupForm.firstname-label}">First name: </label></div>
-	            	<div class="col-value-2-2"><input th:id="firstname" type="text" name="firstname"/></div>
+	            	<div class="col-value-2-2"><input th:id="firstname" th:field="*{firstname}" type="text" name="firstname"/></div>
 	            </div>
 	            <div class="rowForm">
 	            	<div class="col-label-1-2"><label th:text="#{signupForm.email-label}">Email: </label></div>
-	            	<div class="col-value-2-2"><input th:id="email" type="text" name="email"/></div>
+	            	<div class="col-value-2-2"><input th:id="email" th:field="*{email}" type="text" name="email"/></div>
 	            </div>
 	            <div class="rowForm actions">
 	            	<button th:id="signUp" type="submit" th:value="signup" th:text="#{signupForm.signup-submit-label}">Sign up</button>

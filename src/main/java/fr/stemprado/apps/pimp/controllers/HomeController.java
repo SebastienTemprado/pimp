@@ -1,7 +1,10 @@
 package fr.stemprado.apps.pimp.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import fr.stemprado.apps.pimp.beans.dtos.UserDTO;
 
 @Controller
 public class HomeController {
@@ -28,13 +31,13 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/signupForm")
-	public String signupForm() {
+	public String signupForm(@ModelAttribute UserDTO userDTO) {
 		System.out.println("signupForm");
 		return "signupForm";
 	}
 	
 	@RequestMapping("/signup")
-	public String signup() {
+	public String signup(@ModelAttribute UserDTO userDTO) {
 		System.out.println("signup");
 		return "login";
 	}
