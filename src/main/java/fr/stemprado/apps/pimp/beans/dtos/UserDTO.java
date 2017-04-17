@@ -1,7 +1,10 @@
 package fr.stemprado.apps.pimp.beans.dtos;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
 
 public class UserDTO {
 
@@ -9,7 +12,7 @@ public class UserDTO {
 	 * username : the login
 	 */
 	@NotNull
-    @Size(min=2, max=30)
+	@Pattern(regexp="^[a-zA-Záàâäãåçéèêëíìîïñóòôöõúùûüýÿæœ]{1}[a-zA-Záàâäãåçéèêëíìîïñóòôöõúùûüýÿæœ0-9]{1,29}$")
 	private String username;
 	
 	@NotNull
@@ -21,15 +24,15 @@ public class UserDTO {
 	private String passwordConfirmation;
 	
 	@NotNull
-    @Size(min=2, max=30)
+    @Pattern(regexp="^[a-zA-Záàâäãåçéèêëíìîïñóòôöõúùûüýÿæœ]{1}[a-zA-Z'\\-áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœ ]{0,28}[a-zA-Záàâäãåçéèêëíìîïñóòôöõúùûüýÿæœ]{1}$")
 	private String lastname;
 	
 	@NotNull
-    @Size(min=2, max=30)
+	@Pattern(regexp="^[a-zA-Záàâäãåçéèêëíìîïñóòôöõúùûüýÿæœ]{1}[a-zA-Z'\\-áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœ ]{0,28}[a-zA-Záàâäãåçéèêëíìîïñóòôöõúùûüýÿæœ]{1}$")
 	private String firstname;
 	
 	@NotNull
-    @Size(min=2, max=30)
+    @Email
 	private String email;
 
 	public String getUsername() {
