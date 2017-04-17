@@ -43,6 +43,7 @@ public class HomeController {
 	public String signup(@Valid @ModelAttribute UserDTO userDTO, BindingResult bindingResult) {
 		System.out.println("signup");
 		
+		// TODO : basic passwords like '123456' or 'password' are forbidden
 		if (bindingResult.hasErrors() || !userDTO.getPassword().equals(userDTO.getPasswordConfirmation())) {
             return "signupForm";
         }

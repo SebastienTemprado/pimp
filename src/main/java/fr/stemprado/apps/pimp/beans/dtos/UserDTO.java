@@ -2,7 +2,6 @@ package fr.stemprado.apps.pimp.beans.dtos;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 
@@ -16,11 +15,9 @@ public class UserDTO {
 	private String username;
 	
 	@NotNull
-    @Size(min=2, max=30)
+	@Pattern(regexp="^[a-zA-Z'\\-áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœ\"~&²{}#¹()\\[\\]`_^@°+=$£¨\\\\µ*%§!:/;.?,<>]{8,30}$")
 	private String password;
 	
-	@NotNull
-    @Size(min=2, max=30)
 	private String passwordConfirmation;
 	
 	@NotNull
