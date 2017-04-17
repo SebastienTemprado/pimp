@@ -4,31 +4,28 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 public class UserDTO {
 
 	/**
 	 * username : the login
 	 */
-	@NotNull
 	@Pattern(regexp="^[a-zA-Záàâäãåçéèêëíìîïñóòôöõúùûüýÿæœ]{1}[a-zA-Záàâäãåçéèêëíìîïñóòôöõúùûüýÿæœ0-9]{1,29}$")
 	private String username;
 	
-	@NotNull
 	@Pattern(regexp="^[a-zA-Z'\\-áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœ\"~&²{}#¹()\\[\\]`_^@°+=$£¨\\\\µ*%§!:/;.?,<>]{8,30}$")
 	private String password;
 	
 	private String passwordConfirmation;
 	
-	@NotNull
     @Pattern(regexp="^[a-zA-Záàâäãåçéèêëíìîïñóòôöõúùûüýÿæœ]{1}[a-zA-Z'\\-áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœ ]{0,28}[a-zA-Záàâäãåçéèêëíìîïñóòôöõúùûüýÿæœ]{1}$")
 	private String lastname;
 	
-	@NotNull
 	@Pattern(regexp="^[a-zA-Záàâäãåçéèêëíìîïñóòôöõúùûüýÿæœ]{1}[a-zA-Z'\\-áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœ ]{0,28}[a-zA-Záàâäãåçéèêëíìîïñóòôöõúùûüýÿæœ]{1}$")
 	private String firstname;
 	
-	@NotNull
+	@NotEmpty
     @Email
 	private String email;
 
