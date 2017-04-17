@@ -33,6 +33,15 @@ body {
 	color: #FF0000;
 }
 
+.rowForm.field-error label {
+	color: #FF0000;
+}
+
+.rowForm.field-error input {
+	color: #FF0000;
+	box-shadow: 0 0 3px #FF0000;
+}
+
 #loginForm {
 	margin-top: 30px;
 }
