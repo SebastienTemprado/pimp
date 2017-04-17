@@ -1,6 +1,9 @@
 package fr.stemprado.apps.pimp.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -37,8 +40,13 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/signup")
-	public String signup(@ModelAttribute UserDTO userDTO) {
+	public String signup(@Valid @ModelAttribute UserDTO userDTO, BindingResult bindingResult) {
 		System.out.println("signup");
+		
+		if (bindingResult.hasErrors() || !userDTO.getPassword().equals(userDTO.getPasswordConfirmation())) {
+            return "signupForm";
+        }
+		
 		return "login";
 	}
 	
