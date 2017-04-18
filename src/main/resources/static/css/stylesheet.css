@@ -28,6 +28,17 @@ body {
 	color: #000000;
 }
 
+.form-errors {
+	box-shadow: 0 0 3px #FF0000;
+	margin-left: 20%;
+	margin-right: 20%;
+}
+
+.form-errors li {
+	color: #FF0000;
+	list-style-type: none;
+}
+	
 .error-message {
 	text-align:center;
 	color: #FF0000;

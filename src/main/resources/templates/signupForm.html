@@ -11,9 +11,19 @@
         <div id="signupForm">
         	<form th:action="@{/signup}" th:object="${userDTO}" th:method="post">
 	
+				<div th:class="form-errors" th:if="${#fields.hasErrors('*')}">
+					<ul>
+						<li th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></li>
+						<li th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></li>
+						<li th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"></li>
+						<li th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}"></li>
+						<li th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></li>
+					</ul>
+				</div>
+				
 	            <div th:class="${#fields.hasErrors('username')} ? 'rowForm field-error' : 'rowForm'">
 	            	<div class="col-label-1-2">
-	            		<label th:text="#{signupForm.username-label}">User Name : </label>
+	            		<label th:text="#{signupForm.username-label}">User name : </label>
 	            	</div>
 	            	<div class="col-value-2-2">
 	            		<input th:id="username" th:field="*{username}" type="text" name="username"/>
