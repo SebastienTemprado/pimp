@@ -530,6 +530,21 @@ public class UserDTOTest {
     }
     
     @Test
+    public void passwordCanContainDigits() {
+        UserDTO user = new UserDTO();
+        user.setUsername("login");
+        user.setPassword("15479477");
+        user.setPasswordConfirmation("15479477");
+        user.setFirstname("john");
+        user.setLastname("Doe"); 
+        user.setEmail("aa@aa.fr");
+        
+        Set<ConstraintViolation<UserDTO>> violations = this.validator.validate(user);
+        
+        assertTrue(violations.isEmpty());
+    }
+    
+    @Test
     public void invalidEmail() {
     	UserDTO user = new UserDTO();
         user.setUsername("login");
