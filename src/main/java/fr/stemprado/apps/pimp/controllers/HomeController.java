@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.client.RestTemplate;
 
 import fr.stemprado.apps.pimp.beans.dtos.UserDTO;
 
@@ -59,6 +60,12 @@ public class HomeController {
 		if (bindingResult.hasErrors()) {
             return "signupForm";
         }
+		else {
+			RestTemplate restTemplate = new RestTemplate();
+			//TODO : encode password
+			//TODO : get the base url from application.properties 
+			restTemplate.postForObject("http://localhost:9296/addUser", userDTO, UserDTO.class);
+		}
 		
 		return "login";
 	}

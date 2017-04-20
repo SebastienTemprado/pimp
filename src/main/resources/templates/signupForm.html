@@ -10,7 +10,6 @@
         
         <div id="signupForm">
         	<form th:action="@{/signup}" th:object="${userDTO}" th:method="post">
-	
 				<div th:class="form-errors" th:if="${#fields.hasErrors('*')}">
 					<ul>
 						<li th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></li>
