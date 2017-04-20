@@ -17,7 +17,7 @@ public class UserController {
 	private UserService userService;
 	
 	@RequestMapping(value="/addUser", method = RequestMethod.POST)
-	public void addGreet(@RequestBody UserDTO userDTO) {
+	public void addUser(@RequestBody UserDTO userDTO) {
 		userService.addUser(UserMapper.toUser(userDTO));
 	}
 }
