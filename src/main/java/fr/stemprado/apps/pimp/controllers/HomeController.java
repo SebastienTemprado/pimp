@@ -1,9 +1,11 @@
 package fr.stemprado.apps.pimp.controllers;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.Locale;
 
 import javax.validation.Valid;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
@@ -48,7 +50,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/signup")
-	public String signup(@Valid @ModelAttribute UserDTO userDTO, BindingResult bindingResult, Locale locale) {
+	public String signup(@Valid @ModelAttribute UserDTO userDTO, BindingResult bindingResult, Locale locale) throws NoSuchAlgorithmException {
 		System.out.println("signup");
 		
 		//TODO IT 
@@ -62,7 +64,7 @@ public class HomeController {
         }
 		else {
 			RestTemplate restTemplate = new RestTemplate();
-			//TODO : encode password
+			userDTO.setPassword(DigestUtils.md5Hex(userDTO.getPassword()));
 			//TODO : get the base url from application.properties 
 			restTemplate.postForObject("http://localhost:9296/addUser", userDTO, UserDTO.class);
 		}
