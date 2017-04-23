@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -19,6 +20,9 @@ import fr.stemprado.apps.pimp.beans.dtos.UserDTO;
 @Controller
 public class HomeController {
 
+	@Value("${rest-resources-url}")
+	private String REST_RESOURCES_URL;
+	
 	@Autowired
 	private MessageSource messageSource;
 	
@@ -65,8 +69,7 @@ public class HomeController {
 		else {
 			RestTemplate restTemplate = new RestTemplate();
 			userDTO.setPassword(DigestUtils.md5Hex(userDTO.getPassword()));
-			//TODO : get the base url from application.properties 
-			restTemplate.postForObject("http://localhost:9296/addUser", userDTO, UserDTO.class);
+			restTemplate.postForObject(REST_RESOURCES_URL + "addUser", userDTO, UserDTO.class);
 		}
 		
 		return "login";
