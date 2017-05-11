@@ -1,6 +1,5 @@
 package fr.stemprado.apps.pimp.controllers;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.Locale;
 
 import javax.validation.Valid;
@@ -17,6 +16,9 @@ import org.springframework.web.client.RestTemplate;
 
 import fr.stemprado.apps.pimp.beans.dtos.UserDTO;
 
+
+//TODO views in a constant class
+//TODO service endpoints in a constant class
 @Controller
 public class HomeController {
 
@@ -25,6 +27,9 @@ public class HomeController {
 	
 	@Autowired
 	private MessageSource messageSource;
+	
+	@Autowired
+	private RestTemplate restTemplate;
 	
 	@RequestMapping("/pimp")
 	public String pimp() {
@@ -54,7 +59,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/signup")
-	public String signup(@Valid @ModelAttribute UserDTO userDTO, BindingResult bindingResult, Locale locale) throws NoSuchAlgorithmException {
+	public String signup(@Valid @ModelAttribute UserDTO userDTO, BindingResult bindingResult, Locale locale) {
 		System.out.println("signup");
 		
 		//TODO IT 
@@ -67,7 +72,6 @@ public class HomeController {
             return "signupForm";
         }
 		else {
-			RestTemplate restTemplate = new RestTemplate();
 			userDTO.setPassword(DigestUtils.md5Hex(userDTO.getPassword()));
 			restTemplate.postForObject(REST_RESOURCES_URL + "addUser", userDTO, UserDTO.class);
 		}
