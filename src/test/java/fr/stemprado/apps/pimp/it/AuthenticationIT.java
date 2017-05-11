@@ -28,6 +28,7 @@ import org.springframework.web.client.RestTemplate;
 
 import fr.stemprado.apps.pimp.beans.dtos.UserDTO;
 import fr.stemprado.apps.pimp.controllers.HomeController;
+import fr.stemprado.apps.pimp.test.builders.UserDTOBuilder;
 
 //TODO IT test for DB?
 @RunWith(SpringRunner.class)
@@ -52,13 +53,7 @@ public class AuthenticationIT {
     
     @Test
 	public void signupFormValidationError() throws Exception {
-		UserDTO userDTO = new UserDTO();
-		userDTO.setUsername("1johndoe");
-		userDTO.setPassword("ab123456");
-		userDTO.setPasswordConfirmation("ab123456");
-		userDTO.setLastname("d");
-		userDTO.setFirstname("j");
-		userDTO.setEmail("johndoe.gmail.com");
+		UserDTO userDTO = UserDTOBuilder.init().username("1johndoe").lastname("d").firstname("j").build();
 		
 		mockMvc.perform(post("/signup")
 							.contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -76,13 +71,7 @@ public class AuthenticationIT {
 	
 	@Test
 	public void wrongPasswordConfirmationInSignupForm() throws Exception {
-		UserDTO userDTO = new UserDTO();
-		userDTO.setUsername("johndoe");
-		userDTO.setPassword("ab123456");
-		userDTO.setPasswordConfirmation("ab123457");
-		userDTO.setLastname("doe");
-		userDTO.setFirstname("john");
-		userDTO.setEmail("johndoe@gmail.com");
+		UserDTO userDTO = UserDTOBuilder.init().password("ab123456").passwordConfirmation("ab123457").build();
 		
 		//TODO : test on password confirmation error message?
 		mockMvc.perform(post("/signup")
@@ -101,13 +90,7 @@ public class AuthenticationIT {
 	
 	@Test
 	public void signupFormOK() throws Exception {
-		UserDTO userDTO = new UserDTO();
-		userDTO.setUsername("johndoe");
-		userDTO.setPassword("ab123456");
-		userDTO.setPasswordConfirmation("ab123456");
-		userDTO.setLastname("doe");
-		userDTO.setFirstname("john");
-		userDTO.setEmail("johndoe@gmail.com");
+		UserDTO userDTO = UserDTOBuilder.init().build();
 		
 		mockMvc.perform(post("/signup")
 							.contentType(MediaType.APPLICATION_FORM_URLENCODED)

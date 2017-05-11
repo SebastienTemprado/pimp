@@ -6,18 +6,13 @@ import org.junit.Test;
 
 import fr.stemprado.apps.pimp.beans.dtos.UserDTO;
 import fr.stemprado.apps.pimp.beans.entities.User;
+import fr.stemprado.apps.pimp.test.builders.UserDTOBuilder;
 
 public class UserMapperTest {
 
 	@Test
 	public void toUser() {
-		final UserDTO userDTO = new UserDTO();
-		//TODO create a UserBuilder
-		userDTO.setUsername("Username");
-		userDTO.setPassword("Password");
-		userDTO.setLastname("Lastname");
-		userDTO.setFirstname("Firstname");
-		userDTO.setEmail("Email");
+		final UserDTO userDTO = UserDTOBuilder.init().build();
 		
 		User result = UserMapper.toUser(userDTO);
 		
