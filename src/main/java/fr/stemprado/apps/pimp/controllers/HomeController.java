@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 
 import fr.stemprado.apps.pimp.beans.dtos.UserDTO;
+import fr.stemprado.apps.pimp.constants.Views;
 
 
 //TODO views in a constant class
@@ -33,29 +34,29 @@ public class HomeController {
 	
 	@RequestMapping("/pimp")
 	public String pimp() {
-		return "pimp";
+		return Views.Home.PIMP;
 	}
 	
 	@RequestMapping("/")
 	public String home() {
-		return "pimp";
+		return Views.Home.PIMP;
 	}
 	
 	@RequestMapping("/login")
 	public String login() {
-		return "login";
+		return Views.Authentication.LOGIN;
 	}
 	
 	@RequestMapping("/loggedIn")
 	public String signin() {
 		System.out.println("logged In");
-		return "pimp";
+		return Views.Home.PIMP;
 	}
 	
 	@RequestMapping("/signupForm")
 	public String signupForm(@ModelAttribute UserDTO userDTO) {
 		System.out.println("signupForm");
-		return "signupForm";
+		return Views.Authentication.SIGN_UP_FORM;
 	}
 	
 	@RequestMapping("/signup")
@@ -69,14 +70,14 @@ public class HomeController {
 		
 		// TODO : basic passwords like '123456' or 'password' are forbidden
 		if (bindingResult.hasErrors()) {
-            return "signupForm";
+            return Views.Authentication.SIGN_UP_FORM;
         }
 		else {
 			userDTO.setPassword(DigestUtils.md5Hex(userDTO.getPassword()));
 			restTemplate.postForObject(REST_RESOURCES_URL + "addUser", userDTO, UserDTO.class);
 		}
 		
-		return "login";
+		return Views.Authentication.LOGIN;
 	}
 	
 }
