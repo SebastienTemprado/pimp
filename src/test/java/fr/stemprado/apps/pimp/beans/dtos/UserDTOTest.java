@@ -15,7 +15,6 @@ import org.junit.Test;
 
 import fr.stemprado.apps.pimp.test.builders.UserDTOBuilder;
 
-//TODO : create an UserDTO builder for tests
 public class UserDTOTest {
 	
 	private Validator validator;
