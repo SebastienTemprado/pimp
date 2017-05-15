@@ -17,9 +17,10 @@ import org.springframework.web.client.RestTemplate;
 import fr.stemprado.apps.pimp.beans.dtos.UserDTO;
 import fr.stemprado.apps.pimp.constants.Properties;
 import fr.stemprado.apps.pimp.constants.Views;
+import fr.stemprado.apps.pimp.constants.api.AuthenticationApi;
+import fr.stemprado.apps.pimp.constants.api.HomeApi;
+import fr.stemprado.apps.pimp.services.constants.api.UserApi;
 
-
-//TODO service endpoints in a constant class
 @Controller
 public class HomeController {
 
@@ -32,34 +33,34 @@ public class HomeController {
 	@Autowired
 	private RestTemplate restTemplate;
 	
-	@RequestMapping("/pimp")
+	@RequestMapping(HomeApi.PIMP)
 	public String pimp() {
 		return Views.Home.PIMP;
 	}
 	
-	@RequestMapping("/")
+	@RequestMapping(HomeApi.ROOT)
 	public String home() {
 		return Views.Home.PIMP;
 	}
 	
-	@RequestMapping("/login")
+	@RequestMapping(AuthenticationApi.LOGIN)
 	public String login() {
 		return Views.Authentication.LOGIN;
 	}
 	
-	@RequestMapping("/loggedIn")
+	@RequestMapping(AuthenticationApi.LOGGED_IN)
 	public String signin() {
 		System.out.println("logged In");
 		return Views.Home.PIMP;
 	}
 	
-	@RequestMapping("/signupForm")
+	@RequestMapping(AuthenticationApi.SIGN_UP_FORM)
 	public String signupForm(@ModelAttribute UserDTO userDTO) {
 		System.out.println("signupForm");
 		return Views.Authentication.SIGN_UP_FORM;
 	}
 	
-	@RequestMapping("/signup")
+	@RequestMapping(AuthenticationApi.SIGN_UP)
 	public String signup(@Valid @ModelAttribute UserDTO userDTO, BindingResult bindingResult, Locale locale) {
 		System.out.println("signup");
 		
@@ -74,7 +75,7 @@ public class HomeController {
         }
 		else {
 			userDTO.setPassword(DigestUtils.md5Hex(userDTO.getPassword()));
-			restTemplate.postForObject(REST_RESOURCES_URL + "addUser", userDTO, UserDTO.class);
+			restTemplate.postForObject(REST_RESOURCES_URL + UserApi.ADD_USER, userDTO, UserDTO.class);
 		}
 		
 		return Views.Authentication.LOGIN;

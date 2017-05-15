@@ -9,6 +9,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 
+import fr.stemprado.apps.pimp.constants.api.AuthenticationApi;
+import fr.stemprado.apps.pimp.services.constants.api.UserApi;
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -23,11 +26,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
         	.csrf().disable()
             .authorizeRequests()
-                .antMatchers("/css/*", "/img/*", "/js/*", "/signupForm", "/signup", "/addUser").permitAll()
+                .antMatchers("/css/*", "/img/*", "/js/*", AuthenticationApi.SIGN_UP_FORM, AuthenticationApi.SIGN_UP, UserApi.ADD_USER).permitAll()
                 .anyRequest().authenticated()
                 .and()
             .formLogin()
-                .loginPage("/login").successForwardUrl("/loggedIn")
+                .loginPage(AuthenticationApi.LOGIN).successForwardUrl(AuthenticationApi.LOGGED_IN)
                 .permitAll()
                 .and()
             .logout()

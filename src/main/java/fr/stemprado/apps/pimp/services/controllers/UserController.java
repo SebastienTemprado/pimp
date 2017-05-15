@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fr.stemprado.apps.pimp.beans.dtos.UserDTO;
 import fr.stemprado.apps.pimp.mappers.UserMapper;
+import fr.stemprado.apps.pimp.services.constants.api.UserApi;
 import fr.stemprado.apps.pimp.services.services.UserService;
 
 @RestController
@@ -16,7 +17,7 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping(value="/addUser", method = RequestMethod.POST)
+	@RequestMapping(value=UserApi.ADD_USER, method = RequestMethod.POST)
 	public void addUser(@RequestBody UserDTO userDTO) {
 		userService.addUser(UserMapper.toUser(userDTO));
 	}

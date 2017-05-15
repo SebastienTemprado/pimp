@@ -27,7 +27,11 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.client.RestTemplate;
 
 import fr.stemprado.apps.pimp.beans.dtos.UserDTO;
+import fr.stemprado.apps.pimp.constants.Properties;
+import fr.stemprado.apps.pimp.constants.Views;
+import fr.stemprado.apps.pimp.constants.api.AuthenticationApi;
 import fr.stemprado.apps.pimp.controllers.HomeController;
+import fr.stemprado.apps.pimp.services.constants.api.UserApi;
 import fr.stemprado.apps.pimp.test.builders.UserDTOBuilder;
 
 //TODO IT test for DB?
@@ -37,7 +41,7 @@ public class AuthenticationIT {
 	
     private MockMvc mockMvc;
     
-    @Value("${rest-resources-url}")
+    @Value(Properties.Rest.RESOURCES_URL_BASE)
 	private String REST_RESOURCES_URL;
 	
 	@Autowired
@@ -55,7 +59,7 @@ public class AuthenticationIT {
 	public void signupFormValidationError() throws Exception {
 		UserDTO userDTO = UserDTOBuilder.init().username("1johndoe").lastname("d").firstname("j").build();
 		
-		mockMvc.perform(post("/signup")
+		mockMvc.perform(post(AuthenticationApi.SIGN_UP)
 							.contentType(MediaType.APPLICATION_FORM_URLENCODED)
 							.content(EntityUtils.toString(new UrlEncodedFormEntity(Arrays.asList(
 								new BasicNameValuePair("username", userDTO.getUsername()),
@@ -66,7 +70,7 @@ public class AuthenticationIT {
 								new BasicNameValuePair("email", userDTO.getEmail())
 							))))
 						).andExpect(model().hasErrors()
-						).andExpect(view().name("signupForm"));
+						).andExpect(view().name(Views.Authentication.SIGN_UP_FORM));
 	}
 	
 	@Test
@@ -74,7 +78,7 @@ public class AuthenticationIT {
 		UserDTO userDTO = UserDTOBuilder.init().password("ab123456").passwordConfirmation("ab123457").build();
 		
 		//TODO : test on password confirmation error message?
-		mockMvc.perform(post("/signup")
+		mockMvc.perform(post(AuthenticationApi.SIGN_UP)
 							.contentType(MediaType.APPLICATION_FORM_URLENCODED)
 							.content(EntityUtils.toString(new UrlEncodedFormEntity(Arrays.asList(
 								new BasicNameValuePair("username", userDTO.getUsername()),
@@ -85,14 +89,14 @@ public class AuthenticationIT {
 								new BasicNameValuePair("email", userDTO.getEmail())
 							))))
 						).andExpect(model().attributeHasFieldErrors("userDTO","passwordConfirmation")
-						).andExpect(view().name("signupForm"));
+						).andExpect(view().name(Views.Authentication.SIGN_UP_FORM));
 	}
 	
 	@Test
 	public void signupFormOK() throws Exception {
 		UserDTO userDTO = UserDTOBuilder.init().build();
 		
-		mockMvc.perform(post("/signup")
+		mockMvc.perform(post(AuthenticationApi.SIGN_UP)
 							.contentType(MediaType.APPLICATION_FORM_URLENCODED)
 							.content(EntityUtils.toString(new UrlEncodedFormEntity(Arrays.asList(
 								new BasicNameValuePair("username", userDTO.getUsername()),
@@ -103,9 +107,9 @@ public class AuthenticationIT {
 								new BasicNameValuePair("email", userDTO.getEmail())
 							))))
 						).andExpect(model().hasNoErrors()
-						).andExpect(view().name("login"));
+						).andExpect(view().name(Views.Authentication.LOGIN));
 		
 		//TODO argumentCaptor on userDTO
-		verify(restTemplate).postForObject(eq(REST_RESOURCES_URL + "addUser"), any(UserDTO.class), eq(UserDTO.class));
+		verify(restTemplate).postForObject(eq(REST_RESOURCES_URL + UserApi.ADD_USER), any(UserDTO.class), eq(UserDTO.class));
 	}
 }
