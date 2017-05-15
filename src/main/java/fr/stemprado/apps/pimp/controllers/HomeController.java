@@ -15,15 +15,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 
 import fr.stemprado.apps.pimp.beans.dtos.UserDTO;
+import fr.stemprado.apps.pimp.constants.Properties;
 import fr.stemprado.apps.pimp.constants.Views;
 
 
-//TODO views in a constant class
 //TODO service endpoints in a constant class
 @Controller
 public class HomeController {
 
-	@Value("${rest-resources-url}")
+	@Value(Properties.Rest.RESOURCES_URL_BASE)
 	private String REST_RESOURCES_URL;
 	
 	@Autowired
