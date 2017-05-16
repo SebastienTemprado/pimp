@@ -21,6 +21,8 @@ import fr.stemprado.apps.pimp.constants.api.AuthenticationApi;
 import fr.stemprado.apps.pimp.constants.api.HomeApi;
 import fr.stemprado.apps.pimp.services.constants.api.UserApi;
 
+//TODO refactor : Move Authentication use cases to AuthenticationController
+//TODO logger
 @Controller
 public class HomeController {
 
@@ -64,7 +66,6 @@ public class HomeController {
 	public String signup(@Valid @ModelAttribute UserDTO userDTO, BindingResult bindingResult, Locale locale) {
 		System.out.println("signup");
 		
-		//TODO IT 
 		if (!userDTO.getPassword().equals(userDTO.getPasswordConfirmation())) {
 			bindingResult.rejectValue("passwordConfirmation", "error.userDTO", messageSource.getMessage("passwordConfirmation-matching-error", null, locale));
 		}

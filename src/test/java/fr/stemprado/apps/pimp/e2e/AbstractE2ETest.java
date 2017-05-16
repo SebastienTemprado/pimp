@@ -30,7 +30,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 public abstract class AbstractE2ETest {
 	
-	private final static int WAITING_DELAY = 20;
+	private final static int WAITING_DELAY = 300;
 	
 	/**
 	 * DNS or IP + port of the running application 
@@ -40,8 +40,8 @@ public abstract class AbstractE2ETest {
 	
 	protected static WebDriver driver;
 	
-	@BeforeClass
-	public static void initWebDriver() throws E2EConfigurationException {
+		@BeforeClass
+		public static void initWebDriver() throws E2EConfigurationException {
 		final String host = System.getProperty("host");
 		final String port = System.getProperty("port");
 		final String e2eBrowser = System.getProperty("e2eBrowser");

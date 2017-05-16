@@ -28,6 +28,7 @@ public class AuthenticationE2E extends AbstractE2ETest {
 	    WebElement submit = driver.findElement(By.id("signIn"));
 	    submit.click();
 	    // wrong password : stay on the login page
+	    driverWaiting().until(ExpectedConditions.titleIs("Pimp - Login"));
 	    assertThat(driver.getTitle()).isEqualTo("Pimp - Login");
 	    
 	    // try to login = OK
@@ -50,6 +51,7 @@ public class AuthenticationE2E extends AbstractE2ETest {
 		// Sign up
 	    WebElement signupButton = driverWaiting().until(ExpectedConditions.presenceOfElementLocated(By.id("signup")));
 	    signupButton.click();
+	    driverWaiting().until(ExpectedConditions.titleIs("Pimp - Sign up"));
 	    assertThat(driver.getTitle()).isEqualTo("Pimp - Sign up");
 	}
 
