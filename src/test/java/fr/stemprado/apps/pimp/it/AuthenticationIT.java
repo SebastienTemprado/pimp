@@ -32,7 +32,7 @@ import fr.stemprado.apps.pimp.beans.dtos.UserDTO;
 import fr.stemprado.apps.pimp.constants.Properties;
 import fr.stemprado.apps.pimp.constants.Views;
 import fr.stemprado.apps.pimp.constants.api.AuthenticationApi;
-import fr.stemprado.apps.pimp.controllers.HomeController;
+import fr.stemprado.apps.pimp.controllers.AuthenticationController;
 import fr.stemprado.apps.pimp.services.constants.api.UserApi;
 import fr.stemprado.apps.pimp.test.builders.UserDTOBuilder;
 
@@ -47,14 +47,14 @@ public class AuthenticationIT {
 	private String REST_RESOURCES_URL;
 	
 	@Autowired
-	private HomeController homeController;
+	private AuthenticationController authenticationController;
 	
 	@MockBean
 	private RestTemplate restTemplate;
 
     @Before
     public void setUp() {
-        this.mockMvc = MockMvcBuilders.standaloneSetup(homeController).build();
+        this.mockMvc = MockMvcBuilders.standaloneSetup(authenticationController).build();
     }
     
     @Test
