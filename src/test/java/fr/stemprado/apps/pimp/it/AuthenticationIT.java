@@ -1,6 +1,6 @@
 package fr.stemprado.apps.pimp.it;
 
-import static org.mockito.Matchers.any;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -9,12 +9,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.util.Arrays;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -109,7 +111,8 @@ public class AuthenticationIT {
 						).andExpect(model().hasNoErrors()
 						).andExpect(view().name(Views.Authentication.LOGIN));
 		
-		//TODO argumentCaptor on userDTO
-		verify(restTemplate).postForObject(eq(REST_RESOURCES_URL + UserApi.ADD_USER), any(UserDTO.class), eq(UserDTO.class));
+		ArgumentCaptor<UserDTO> userDTOCaptor = ArgumentCaptor.forClass(UserDTO.class);
+		verify(restTemplate).postForObject(eq(REST_RESOURCES_URL + UserApi.ADD_USER), userDTOCaptor.capture(), eq(UserDTO.class));
+		assertThat(userDTOCaptor.getValue().getPassword()).isEqualTo(DigestUtils.md5Hex(userDTO.getPassword()));
 	}
 }
