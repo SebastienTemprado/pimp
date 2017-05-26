@@ -1,5 +1,6 @@
 package fr.stemprado.apps.pimp.it;
 
+import static fr.stemprado.apps.pimp.test.matchers.ErrorMatcher.errors;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
@@ -8,6 +9,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import java.util.Arrays;
+import java.util.Locale;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -22,6 +24,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.MessageSource;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -45,6 +48,9 @@ public class AuthenticationIT {
     
     @Value(Properties.Rest.RESOURCES_URL_BASE)
 	private String REST_RESOURCES_URL;
+    
+    @Autowired
+	private MessageSource messageSource;
 	
 	@Autowired
 	private AuthenticationController authenticationController;
@@ -79,7 +85,6 @@ public class AuthenticationIT {
 	public void wrongPasswordConfirmationInSignupForm() throws Exception {
 		UserDTO userDTO = UserDTOBuilder.init().password("ab123456").passwordConfirmation("ab123457").build();
 		
-		//TODO : test on password confirmation error message?
 		mockMvc.perform(post(AuthenticationApi.SIGN_UP)
 							.contentType(MediaType.APPLICATION_FORM_URLENCODED)
 							.content(EntityUtils.toString(new UrlEncodedFormEntity(Arrays.asList(
@@ -89,8 +94,9 @@ public class AuthenticationIT {
 								new BasicNameValuePair("lastname", userDTO.getLastname()),
 								new BasicNameValuePair("firstname", userDTO.getFirstname()),
 								new BasicNameValuePair("email", userDTO.getEmail())
-							))))
+							)))).locale(Locale.ENGLISH)
 						).andExpect(model().attributeHasFieldErrors("userDTO","passwordConfirmation")
+						).andExpect(errors().hasError("userDTO", messageSource.getMessage("passwordConfirmation-matching-error", null, Locale.ENGLISH))
 						).andExpect(view().name(Views.Authentication.SIGN_UP_FORM));
 	}
 	
