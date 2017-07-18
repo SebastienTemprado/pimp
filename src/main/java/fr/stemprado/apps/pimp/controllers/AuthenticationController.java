@@ -4,12 +4,12 @@ import java.util.Locale;
 
 import javax.validation.Valid;
 
-import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -35,6 +35,9 @@ public class AuthenticationController {
 	
 	@Autowired
 	private RestTemplate restTemplate;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@RequestMapping(AuthenticationApi.LOGIN)
 	public String login() {
@@ -69,7 +72,7 @@ public class AuthenticationController {
         }
 		else {
 			logger.debug("Call the service to add the user");
-			userDTO.setPassword(DigestUtils.md5Hex(userDTO.getPassword()));
+			userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
 			restTemplate.postForObject(REST_RESOURCES_URL + UserApi.ADD_USER, userDTO, UserDTO.class);
 		}
 		

@@ -14,4 +14,14 @@ public class UserMapper {
 		user.setEmail(userDTO.getEmail());
 		return user;
 	}
+
+	public static UserDTO toUserDTO(User user) {
+		UserDTO userDTO = new UserDTO();
+		userDTO.setUsername(user.getUsername());
+		userDTO.setPassword(user.getPassword());
+		userDTO.setLastname(user.getLastname());
+		userDTO.setFirstname(user.getFirstname());
+		userDTO.setEmail(user.getEmail());
+		return userDTO;
+	}
 }

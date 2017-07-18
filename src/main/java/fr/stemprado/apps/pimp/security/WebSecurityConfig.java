@@ -7,14 +7,20 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 
 import fr.stemprado.apps.pimp.constants.api.AuthenticationApi;
 import fr.stemprado.apps.pimp.services.constants.api.UserApi;
+import fr.stemprado.apps.pimp.services.services.UserService;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+	
+	@Autowired
+	private UserService userService;
 	
 	@Bean
 	public SpringSecurityDialect securityDialect() {
@@ -26,7 +32,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
         	.csrf().disable()
             .authorizeRequests()
-                .antMatchers("/css/*", "/img/*", "/js/*", AuthenticationApi.SIGN_UP_FORM, AuthenticationApi.SIGN_UP, UserApi.ADD_USER).permitAll()
+            //TODO : UserApi.GET_USER added for IT to verify that an user can be added. No authentication during IT 
+                .antMatchers("/css/*", "/img/*", "/js/*", AuthenticationApi.SIGN_UP_FORM, AuthenticationApi.SIGN_UP, UserApi.ADD_USER, UserApi.GET_USER).permitAll()
                 .anyRequest().authenticated()
                 .and()
             .formLogin()
@@ -37,8 +44,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll();
     }
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("user").password("password").roles("USER");
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+	    auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
+	}
+	
+	@Bean
+    public PasswordEncoder passwordEncoder(){
+        PasswordEncoder encoder = new BCryptPasswordEncoder();
+        return encoder;
     }
 }
