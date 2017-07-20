@@ -1,4 +1,4 @@
-package fr.stemprado.apps.pimp.it;
+package fr.stemprado.apps.pimp.it.controllers;
 
 import static fr.stemprado.apps.pimp.test.matchers.ErrorMatcher.errors;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -39,9 +39,10 @@ import fr.stemprado.apps.pimp.constants.Views;
 import fr.stemprado.apps.pimp.constants.api.AuthenticationApi;
 import fr.stemprado.apps.pimp.services.constants.api.UserApi;
 import fr.stemprado.apps.pimp.test.builders.UserDTOBuilder;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT, classes={Pimp.class})
-public class AuthenticationIT {
+public class AuthenticationControllerIT {
 	
 	@Autowired
 	private TestRestTemplate restTemplate;
