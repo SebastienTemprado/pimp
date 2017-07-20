@@ -2,12 +2,12 @@ package fr.stemprado.apps.pimp.it.controllers;
 
 import static fr.stemprado.apps.pimp.test.matchers.ErrorMatcher.errors;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
+import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.authenticated;
+import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.unauthenticated;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
-import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.unauthenticated;
-import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.authenticated;
 
 import java.util.Arrays;
 import java.util.Locale;
@@ -21,7 +21,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -34,7 +33,6 @@ import org.springframework.web.context.WebApplicationContext;
 
 import fr.stemprado.apps.pimp.Pimp;
 import fr.stemprado.apps.pimp.beans.dtos.UserDTO;
-import fr.stemprado.apps.pimp.constants.Properties;
 import fr.stemprado.apps.pimp.constants.Views;
 import fr.stemprado.apps.pimp.constants.api.AuthenticationApi;
 import fr.stemprado.apps.pimp.services.constants.api.UserApi;
@@ -44,17 +42,14 @@ import fr.stemprado.apps.pimp.test.builders.UserDTOBuilder;
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT, classes={Pimp.class})
 public class AuthenticationControllerIT {
 	
+	private MockMvc mockMvc;
+	
 	@Autowired
 	private TestRestTemplate restTemplate;
 	
 	@Autowired
 	private Filter springSecurityFilterChain;
 	
-    private MockMvc mockMvc;
-
-    @Value(Properties.Rest.RESOURCES_URL_BASE)
-	private String REST_RESOURCES_URL;
-    
     @Autowired
     private WebApplicationContext context;
     
