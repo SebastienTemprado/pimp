@@ -1,22 +1,23 @@
 # Pimp
-A project to manage IT Projects.
+Pimp is a project to manage IT Projects.
+Features are modular.
 
 # Features 
-  - F001 : Scrum (not implemented)
-  - F002 : Ticketing system (not implemented)
-  - F003 : LDAP Authentification (not implemented)
-  - F004 : Users management (not implemented)
-  - F005 : Tests management (not implemented)
-  - F006 : Linked with the code (not implemented)
-  - F007 : Reportings (not implemented)
-  - F008 : Calendar Management (not implemented)
-  - F009 : Notifications (not implemented)
-  - F010 : Polling (not implemented)
-  - F011 : Chat (not implemented)
-  - F012 : Audio meetings (not implemented)
-  - F013 : Backup (not implemented)
-  - F014 : Import/Export (not implemented)
-  - F015 : Internationalization (not implemented)
+  - Scrum 
+  - Ticketing system 
+  - LDAP Authentification 
+  - Users management 
+  - Tests management 
+  - Linked with the code (commits)
+  - Reportings (dashboard)
+  - Calendar Management
+  - Notifications (email, slack)
+  - Polling 
+  - Chat 
+  - Audio meetings 
+  - Backup 
+  - Import/Export (xls, csv)
+  - Internationalization 
   
 # Workspace initialization
 You can change any of the following settings in application.properties
@@ -24,10 +25,9 @@ You can change any of the following settings in application.properties
   - The default port is 9296
   
  # Framework
-  - Spring Boot
-  - Spring MVC
-  - Spring Security
-  - Java8
+  - Angular 
+  - Spring Boot 
+  - Java8 
   - REST
   - Flyway
   - Hibernate
@@ -36,6 +36,3 @@ You can change any of the following settings in application.properties
   
  # Other information
   - Language : English
-  - Owner : Sébastien Temprado
-  - Country : France
-  
