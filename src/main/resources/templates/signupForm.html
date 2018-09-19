@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title th:text="#{signupForm.page-title}">Pimp - Sign up</title>
+        <div th:remove="tag" th:replace="fragments/header :: common-static-resources"></div>
+    </head>
+    <body>
+    	<div th:replace="fragments/header :: header"></div> 
+        
+        <div id="signupForm">
+        	<form th:action="@{/signup}" th:object="${userDTO}" th:method="post">
+				<div th:class="form-errors" th:if="${#fields.hasErrors('*')}">
+					<ul>
+						<li th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></li>
+						<li th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></li>
+						<li th:if="${#fields.hasErrors('passwordConfirmation')}" th:errors="*{passwordConfirmation}"></li>
+						<li th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"></li>
+						<li th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}"></li>
+						<li th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></li>
+					</ul>
+				</div>
+				
+	            <div th:class="${#fields.hasErrors('username')} ? 'rowForm field-error' : 'rowForm'">
+	            	<div class="col-label-1-2">
+	            		<label th:text="#{signupForm.username-label}">User name : </label>
+	            	</div>
+	            	<div class="col-value-2-2">
+	            		<input th:id="username" th:field="*{username}" type="text" name="username"/>
+	            	</div>
+	            </div>
+	            <div th:class="${#fields.hasErrors('password')} ? 'rowForm field-error' : 'rowForm'">
+	            	<div class="col-label-1-2">
+	            		<label th:text="#{signupForm.password-label}">Password: </label>
+	            	</div>
+	            	<div class="col-value-2-2">
+	            		<input th:id="password" th:field="*{password}" type="password" name="password"/>
+	            	</div>
+	            </div>
+	            <div th:class="${#fields.hasErrors('passwordConfirmation')} ? 'rowForm field-error' : 'rowForm'">
+	            	<div class="col-label-1-2">
+	            		<label th:text="#{signupForm.password-confirmation-label}">Password confirmation: </label>
+	            	</div>
+	            	<div class="col-value-2-2">
+	            		<input th:id="password-confirmation" th:field="*{passwordConfirmation}" type="password" name="password-confirmation"/>
+	            	</div>
+	            </div>
+	            <div th:class="${#fields.hasErrors('lastname')} ? 'rowForm field-error' : 'rowForm'">
+	            	<div class="col-label-1-2">
+	            		<label th:text="#{signupForm.lastname-label}">Last name: </label>
+	            	</div>
+	            	<div class="col-value-2-2">
+	            		<input th:id="lastname" th:field="*{lastname}" type="text" name="lastname"/>
+	            	</div>
+	            </div>
+	            <div th:class="${#fields.hasErrors('firstname')} ? 'rowForm field-error' : 'rowForm'">
+	            	<div class="col-label-1-2">
+	            		<label th:text="#{signupForm.firstname-label}">First name: </label>
+	            	</div>
+	            	<div class="col-value-2-2">
+	            		<input th:id="firstname" th:field="*{firstname}" type="text" name="firstname"/>
+	            	</div>
+	            </div>
+	            <div th:class="${#fields.hasErrors('email')} ? 'rowForm field-error' : 'rowForm'">
+	            	<div class="col-label-1-2">
+	            		<label th:text="#{signupForm.email-label}">Email: </label>
+	            	</div>
+	            	<div class="col-value-2-2">
+	            		<input th:id="email" th:field="*{email}" type="text" name="email"/>
+	            	</div>
+	            </div>
+	            <div class="rowForm actions">
+	            	<button th:id="signUp" type="submit" th:value="signup" th:text="#{signupForm.signup-submit-label}">Sign up</button>
+	            </div>
+	        </form>
+    	</div>
+    </body>
+</html>

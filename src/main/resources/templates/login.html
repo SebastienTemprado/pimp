@@ -3,14 +3,14 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
     <head>
         <title th:text="#{login.page-title}">Pimp - Login</title>
-        <link th:href="@{/css/stylesheet.css}" rel="stylesheet" type="text/css"/>
+        <div th:remove="tag" th:replace="fragments/header :: common-static-resources"></div>
         <script type="text/javascript" th:src="@{/js/login.js}"></script>
     </head>
     <body>
     	<div th:replace="fragments/header :: header"></div> 
         
         <div id="loginForm">
-        	<form th:action="@{/login}" method="post">
+        	<form th:action="@{/login}" th:method="post">
         	
 	        	<div th:class="error-message" th:if="${param.error}" th:text="#{login.error.invalid-login}">
 		            Invalid username and password.
@@ -28,7 +28,8 @@
 	            	<div class="col-value-2-2"><input th:id="password" type="password" name="password"/></div>
 	            </div>
 	            <div class="rowForm actions">
-	            	<input th:id="signIn" type="submit" th:value="#{login.signin-submit-label}" value="Sign In"/>
+	            	<button th:id="signIn" type="submit" th:value="signin" th:text="#{login.signin-submit-label}"></button>
+	            	<button th:id="signup" type="button" th:value="signup" th:text="#{login.signup-submit-label}"></button>
 	            </div>
 	        </form>
     	</div>

@@ -28,9 +28,29 @@ body {
 	color: #000000;
 }
 
+.form-errors {
+	box-shadow: 0 0 3px #FF0000;
+	margin-left: 20%;
+	margin-right: 20%;
+}
+
+.form-errors li {
+	color: #FF0000;
+	list-style-type: none;
+}
+	
 .error-message {
 	text-align:center;
 	color: #FF0000;
+}
+
+.rowForm.field-error label {
+	color: #FF0000;
+}
+
+.rowForm.field-error input {
+	color: #FF0000;
+	box-shadow: 0 0 3px #FF0000;
 }
 
 #loginForm {
@@ -42,9 +62,12 @@ body {
 	display: flex;
 }
 
-.rowForm.actions input {
-	margin-left:auto;
-	margin-right:auto;
+.rowForm.actions {
+	justify-content: center;
+}
+
+.rowForm.actions button {
+	margin-right:5px;
 }
 
 .col-label-1-2 {

@@ -19,9 +19,8 @@ A project to manage IT Projects.
   - F015 : Internationalization (not implemented)
   
 # Workspace initialization
-You can change any of the following settings in database.properties
-  - Create a database "pimpdb" with a user "pimp" as owner with the password "pimp-d.?F" 
 You can change any of the following settings in application.properties
+  - Create a database "pimpdb" with a user "pimp" as owner with the password "pimp-d.?F" 
   - The default port is 9296
   
  # Framework
@@ -30,6 +29,7 @@ You can change any of the following settings in application.properties
   - Spring Security
   - Java8
   - REST
+  - Flyway
   - Hibernate
   - Postgresql
   - Selenium (Firefox & Chrome)
