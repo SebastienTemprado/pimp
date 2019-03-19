@@ -2,22 +2,6 @@
 Pimp is a project to manage IT Projects.
 Features are modular.
 
-# Features 
-  - Scrum 
-  - Ticketing system 
-  - LDAP Authentification 
-  - Users management 
-  - Tests management 
-  - Linked with the code (commits)
-  - Reportings (dashboard)
-  - Calendar Management
-  - Notifications (email, slack)
-  - Polling 
-  - Chat 
-  - Audio meetings 
-  - Backup 
-  - Import/Export (xls, csv)
-  - Internationalization 
   
 # Workspace initialization
 You can change any of the following settings in application.properties
